@@ -60,8 +60,8 @@ setup(
         'dephell-venvs>=0.1.16', 'dephell-versioning', 'docker', 'dockerpty',
         'fissix; python_version >= "3.6"',
         'fissix-py35; python_version < "3.6"', 'flatdict', 'html5lib', 'jinja2',
-        'm2r', 'packaging', 'pip>=18.0', 'pygments', 'requests', 'ruamel.yaml',
-        'setuptools', 'tabulate', 'tomlkit', 'yaspin'
+        'm2r', 'metaextract', 'packaging', 'pip>=18.0', 'pygments', 'requests',
+        'ruamel.yaml', 'setuptools', 'tabulate', 'tomlkit', 'yaspin'
     ],
     extras_require={
         'full': ['aiofiles', 'autopep8', 'colorama', 'graphviz', 'yapf'],

@@ -4,12 +4,14 @@ from distutils.core import run_setup
 from io import BytesIO, StringIO
 from logging import getLogger
 from pathlib import Path
+from sys import executable
 from typing import Optional
 
 # external
 from dephell_discover import Root as PackageRoot
 from dephell_links import DirLink, FileLink, URLLink, VCSLink, parse_link
 from dephell_specifier import RangeSpecifier
+from metaextract import utils as meta_utils
 from packaging.requirements import Requirement
 from setuptools.dist import Distribution
 
@@ -258,6 +260,14 @@ class SetupPyConverter(BaseConverter):
 
     @staticmethod
     def _execute(path: Path):
+        try:
+            dist = meta_utils._setup_py_run_from_dir(str(path.parent),
+                                                     executable)
+        except Exception as e:
+            logger.error('{}: {}'.format(type(e).__name__, str(e)))
+        else:
+            return Distribution(dist['data'])
+
         source = path.read_text('utf-8')
         new_source = source.replace('setup(', '_dist = dict(')
         if new_source == source:
